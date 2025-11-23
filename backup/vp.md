@@ -1,1 +1,0 @@
-https://webget.yfjc.xyz/api/v1/client/subscribe?token=58f430519bc69309c5df1f15e4758a47&flag=meta
