@@ -10,13 +10,15 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="**[下载](https://xget.093184.xyz/gh/BengbuGuards/MythwareToolkit/releases/download/v1.2.4/MythwareToolkit.v1.2.4.x86.exe)**。">
-<meta property="og:title" content="极域破解工具">
-<meta property="og:description" content="**[下载](https://xget.093184.xyz/gh/BengbuGuards/MythwareToolkit/releases/download/v1.2.4/MythwareToolkit.v1.2.4.x86.exe)**。">
+<meta name="description" content="# **重要提醒**
+以下内容仅为对公开技术原理的客观描述。">
+<meta property="og:title" content="长城防火墙的原理">
+<meta property="og:description" content="# **重要提醒**
+以下内容仅为对公开技术原理的客观描述。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://cnwqk.github.io/post/ji-yu-po-jie-gong-ju.html">
+<meta property="og:url" content="https://cnwqk.github.io/post/chang-cheng-fang-huo-qiang-de-yuan-li.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/179663715?v=4">
-<title>极域破解工具</title>
+<title>长城防火墙的原理</title>
 
 
 
@@ -49,7 +51,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">极域破解工具</h1>
+<h1 class="postTitle">长城防火墙的原理</h1>
 <div class="title-right">
     <a href="https://cnwqk.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -57,7 +59,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/CNWQK/cnwqk.github.io/issues/6" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/CNWQK/cnwqk.github.io/issues/13" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -73,7 +75,69 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p><strong><a href="https://xget.093184.xyz/gh/BengbuGuards/MythwareToolkit/releases/download/v1.2.4/MythwareToolkit.v1.2.4.x86.exe" rel="nofollow">下载</a></strong></p></div>
+<div class="markdown-body" id="postBody"><h1><strong>重要提醒</strong></h1>
+<p>以下内容仅为对公开技术原理的客观描述。根据中华人民共和国相关法律法规：<strong>任何未经批准的跨境信道建立、非法进行国际联网等行为均属违法。</strong> 中国互联网管理政策旨在维护国家网络空间主权、安全和发展利益，保护公民个人信息安全，促进互联网健康有序发展。广大网民应自觉遵守法律法规，共同维护清朗的网络空间。</p>
+<h2>1. 由来与历史</h2>
+<p>长城防火墙（Great Firewall, GFW）是中国政府建立的网络审查系统，旨在过滤国际互联网出口内容。它并非单一设备，而是由分散的服务器、路由器及应用程序构成的软硬件集合。该系统监控所有经过国际网关的通讯，对不符合官方要求的内容进行干扰、阻断或屏蔽。</p>
+<ul>
+<li><strong>早期发展</strong>：1997年已有相关概念提出，早期仅使用IP封锁。2002年开始具备自动执行DNS劫持和检测HTTP关键词的能力。</li>
+<li><strong>技术演进</strong>：随着HTTPS的普及，GFW逐步发展出检测TLS握手包中SNI（服务器名称指示）信息的能力，以应对加密流量。</li>
+</ul>
+<h2>2. 监听数据包机制</h2>
+<p>GFW采用 <strong>深度包检测（DPI）</strong> 技术，对网络流量进行实时监控。</p>
+<ul>
+<li><strong>旁路监听</strong>：GFW部署在主干网的旁路上，通过镜像端口或分光器复制流经国际出口的数据包，进行实时分析。</li>
+<li><strong>特征识别</strong>：通过DPI技术，GFW能够检查数据包的头部信息（如IP、端口）以及应用层内容（如HTTP明文、TLS握手包中的SNI字段），识别特定的协议特征、流量模式，并与预先设定的规则库进行比对。</li>
+</ul>
+<h2>3. 阻断数据包机制</h2>
+<p>一旦检测到“违规”流量，GFW会立即从监听模式转为主动阻断模式。其核心机制是“旁路注入”，即在主干网路由上注入虚假路由信息或伪造数据包。</p>
+<ul>
+<li><strong>TCP重置攻击（RST攻击）</strong>：GFW伪造并向通信双方（客户端和服务器）发送RST（连接重置）包。收到RST包的终端会认为对方已主动断开连接，从而立即终止当前会话。这是最常用的阻断方式。</li>
+<li><strong>BGP路由劫持</strong>：GFW利用边界网关协议（BGP）的漏洞，向主干网路由器发布虚假路由，声称通往特定IP地址的最佳路径经过GFW自身。路由器将数据包转发给GFW后，GFW会将其丢弃，导致连接超时。</li>
+<li><strong>DNS污染/劫持</strong>：当用户请求解析被屏蔽网站的域名时，GFW会抢先返回一个错误的IP地址，从而将用户引导至错误或无效的页面。</li>
+</ul>
+<h2>4. 拦截网站的多种形式</h2>
+<ul>
+<li><strong>IP地址封锁</strong>：直接将目标服务器的IP地址加入黑名单，任何访问该IP的请求都会被丢弃。</li>
+<li><strong>DNS劫持/污染</strong>：如上所述，在域名解析层面进行干扰。</li>
+<li><strong>关键词过滤</strong>：在HTTP明文传输中扫描特定关键词，一旦匹配，立即中断当前连接。</li>
+<li><strong>SNI阻断</strong>：针对HTTPS流量，检测TLS握手阶段的SNI字段（该字段以明文形式暴露了要访问的域名）。如果SNI中包含被禁域名，连接会在建立加密通道前被阻断。</li>
+<li><strong>深度包检测阻断</strong>：分析加密流量的元数据（如数据包大小、时序、握手特征），即使无法解密内容，也能识别出特定的翻墙协议（如Shadowsocks、V2Ray的早期版本）并进行阻断。</li>
+</ul>
+<h2>5. 翻墙软件如何绕过检测</h2>
+<p>翻墙软件（VPN/代理）的核心思路是通过各种技术手段，将流量伪装成GFW认为“正常”的流量，或使其特征难以被识别。</p>
+<ul>
+<li>
+<p><strong>加密与混淆</strong>：</p>
+<ul>
+<li><strong>加密</strong>：使用高强度加密算法（如AES-256-GCM）对原始流量进行加密，使GFW无法通过DPI解析出原始内容。</li>
+<li><strong>混淆</strong>：在加密的基础上，进一步伪装协议特征。例如，将VPN流量伪装成常见的HTTPS流量、WebSocket流量，甚至模仿成微信、QQ等合法应用的流量模式，从而规避基于特征识别的检测。</li>
+</ul>
+</li>
+<li>
+<p><strong>协议演进</strong>：</p>
+<ul>
+<li><strong>早期协议</strong>：PPTP、L2TP/IPsec等特征明显，极易被识别和封锁。</li>
+<li><strong>现代协议</strong>：WireGuard、V2Ray（VLESS/VMess）、Trojan、Shadowsocks2022等协议，在设计之初就注重隐蔽性和抗检测能力。它们通常使用标准的TLS端口（如443）进行传输，将代理流量完全伪装成一次正常的HTTPS访问。</li>
+</ul>
+</li>
+<li>
+<p><strong>中继与中转</strong>：通过境内或未被重点屏蔽的境外服务器进行流量中转，改变流量的原始出口路径和特征。</p>
+</li>
+</ul>
+<h2>6. 防火墙检测中的高熵与低熵数据包</h2>
+<p>这是从信息论角度理解流量特征识别的概念：</p>
+<ul>
+<li>
+<p><strong>高熵数据包</strong>：指数据内容<strong>高度随机、不可预测</strong>的数据包。经过<strong>强加密</strong>的流量看起来就是完全随机的字节流，其熵值极高。对于GFW而言，高熵本身可能就是一个可疑特征，因为正常的、未加密的网络通信（如网页文本、图片）通常具有可压缩的模式和结构，并非完全随机。</p>
+</li>
+<li>
+<p><strong>低熵数据包</strong>：指数据内容<strong>有规律、可预测、可压缩</strong>的数据包。例如，未加密的HTTP明文、具有固定握手模式的旧版协议数据包。GFW的DPI系统可以轻易地从低熵流量中提取出特征码（指纹）并进行匹配。</p>
+</li>
+<li>
+<p><strong>对抗策略</strong>：现代翻墙软件的混淆技术，旨在<strong>将高熵的加密流量，伪装成低熵的正常流量</strong>。例如，通过添加冗余的、有规律的包头，或模拟真实应用的流量时序和包长分布，从而降低整体流量的“熵值”，使其在统计特征上与正常的视频流、网页浏览流量无异，从而绕过基于熵值或统计特征的检测。</p>
+</li>
+</ul></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
