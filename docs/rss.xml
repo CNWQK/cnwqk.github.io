@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Lmoon Blog</title><link>https://cnwqk.github.io</link><description>Time is now.</description><copyright>Lmoon Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/179663715?v=4</url><title>avatar</title><link>https://cnwqk.github.io</link></image><lastBuildDate>Sun, 15 Mar 2026 04:05:52 +0000</lastBuildDate><managingEditor>Lmoon Blog</managingEditor><ttl>60</ttl><webMaster>Lmoon Blog</webMaster><item><title>无题</title><link>https://cnwqk.github.io/post/wu-ti.html</link><description>这篇文章语法应该很差，因为我基本不会用 Markdown
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Lmoon Blog</title><link>https://cnwqk.github.io</link><description>Time is now.</description><copyright>Lmoon Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/179663715?v=4</url><title>avatar</title><link>https://cnwqk.github.io</link></image><lastBuildDate>Wed, 06 May 2026 04:21:28 +0000</lastBuildDate><managingEditor>Lmoon Blog</managingEditor><ttl>60</ttl><webMaster>Lmoon Blog</webMaster><item><title>杂</title><link>https://cnwqk.github.io/post/za.html</link><description>**先做简单说明，从今天开始，不管是微信还是 QQ，或者电子邮件，几天不回都要成常态了
+微信一次性会和你聊 3 条以上的你就偷着乐吧**
+熟悉我的都知道，我想拿手机可以说难如登天，别看我平常还发点崩铁截图，我这几天加起来的总游玩时间可能还没有你们一个周末的防沉迷时间长，尤其后面这几天，手机越来越难拿了，因为这几天都在忙着在 Cloudflare 上面挂项目，我也没有复习的习惯，所以这次考试我有点不想管了，结果可想而知，手机只会越来越难拿，所以我只能把消息获取面减到最小，只保留电子邮件，并且电子邮件也不保证回复速度
+lin0yuv@gmail.com
+admin@093184.xyz
+没有电子邮件可以用我的私有服务注册一个
+。</description><guid isPermaLink="true">https://cnwqk.github.io/post/za.html</guid><pubDate>Wed, 06 May 2026 04:21:00 +0000</pubDate></item><item><title>无题</title><link>https://cnwqk.github.io/post/wu-ti.html</link><description>这篇文章语法应该很差，因为我基本不会用 Markdown
 每天坐在家里真的很无聊，基本拿不到手机，也几乎没有人陪我聊天
 五个网站全面都在运营，安全规则也很给力，也没有什么要管的
 特别好的朋友只加了两个，但两个都不常联系，聊天也没有之前的感觉了
